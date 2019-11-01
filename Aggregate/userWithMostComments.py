@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 import numpy as np
 
+
 def userWithMostComments(user_tree, validatedPath):
     '''
 
@@ -21,10 +22,9 @@ def userWithMostComments(user_tree, validatedPath):
     for comment in comment_list:
         key = comment['UserId']
         if key in user_comment_count_map:
-            user_comment_count_map[key]+=1
+            user_comment_count_map[key] += 1
         else:
-            user_comment_count_map[key]=1
-    userIdsWithMostComments = sorted(user_comment_count_map.keys(), key = lambda x: user_comment_count_map[x], reverse=True)
+            user_comment_count_map[key] = 1
+    userIdsWithMostComments = sorted(user_comment_count_map.keys(), key=lambda x: user_comment_count_map[x],
+                                     reverse=True)
     return user_map[userIdsWithMostComments[0]]
-
-

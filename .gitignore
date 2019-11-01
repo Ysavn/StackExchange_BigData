@@ -1,0 +1,5 @@
+*.7z
+*.xml
+*.pyc
+__pycache__/
+venv/

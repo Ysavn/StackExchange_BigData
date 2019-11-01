@@ -25,7 +25,7 @@ def validate_user_loc(cleanedPath):
                 country = abbr[country]
             user_value = user
             user_value['Location'] = country
-            print(user_value)
+            #print(user_value)
             validatedAndCleaned.append(user_value)
         time.sleep(1)
     return validatedAndCleaned
