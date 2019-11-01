@@ -8,7 +8,6 @@ nodes.append(hostname)
 cluster = Cluster(nodes)
 session = cluster.connect(keyspace)
 
-
 def insertInUserInfoCF(domainName, userinfo_map):
     '''
 
