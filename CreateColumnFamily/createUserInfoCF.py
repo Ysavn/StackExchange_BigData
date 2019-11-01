@@ -1,5 +1,4 @@
 from cassandra.cluster import Cluster
-
 hostname = '127.0.0.1'
 keyspace = 'db1'
 column_family = 'userInfo'
