@@ -1,8 +1,11 @@
 from ExtractAndFilter import extractAndFilter as EAF
 from ValidateAndClean import validateAndClean as VAC
 from Aggregate import aggregateUserInfoBQs as AGG_USR_INFO
+from Aggregate import aggregatePostInfoBQs as AGG_POST_INFO
 from InsertARowIntoColumnFamily import insertARowIntoUserInfoCF as INSRT_USR_INFO
+from InsertARowIntoColumnFamily import insertARowIntoPostInfoCF as INSRT_POST_INFO
 from CreateColumnFamily import createUserInfoCF as USR_INFO_CF
+from CreateColumnFamily import createPostInfoCF as POST_INFO_CF
 import os
 import subprocess
 
@@ -41,9 +44,11 @@ def runETLPipeline(domain):
     inputPath1 = '/Users/avneet/Documents/Fall-19/SE_Validate_Clean/' + domainName + '.stackexchange.com/'
     inputPath2 = '/Users/avneet/Documents/Fall-19/SE_FilterXML/' + domainName + '.stackexchange.com/'
     user_info_map = AGG_USR_INFO.aggregate(inputPath1, inputPath2)
+    post_info_map = AGG_POST_INFO.aggregate(inputPath1)
 
     # 6) Insert the column family into Cassandra
     INSRT_USR_INFO.insertInUserInfoCF(domainName, user_info_map)
+    INSRT_POST_INFO.insertInPostInfoCF(domainName, post_info_map)
 
 if __name__ == '__main__':
     directoryPath = '/Users/avneet/Documents/Fall-19/SE_7zFiles/'
@@ -53,6 +58,7 @@ if __name__ == '__main__':
 
     #Create Column Familes User_Info And Post_Info if not exists
     USR_INFO_CF.createUserInfoCF()
+    POST_INFO_CF.createPostInfoCF()
 
     # 1) Unarchive the source data
     #unarchive_script = '/Users/avneet/Documents/Fall-19/unarchive7z.sh'

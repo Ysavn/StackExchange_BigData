@@ -1,7 +1,7 @@
 import os
 import numpy as np
 from ValidateAndClean import validateAndCleanBadges as VAC_Badges, validateAndCleanComments as VAC_Comments, \
-    validateAndCleanUsers as VAC_Users
+    validateAndCleanUsers as VAC_Users, validateAndCleanPosts as VAC_Posts
 
 def validateAndClean(outputPath, inputPath):
     '''
@@ -22,6 +22,9 @@ def validateAndClean(outputPath, inputPath):
     
     validatedComments = np.array(VAC_Comments.validate_comment(inputPath))
     np.save(outputPath + 'Comments.npy', validatedComments)
+
+    validatedPosts = np.array(VAC_Posts.validate_posts(inputPath))
+    np.save(outputPath + 'Posts.npy', validatedPosts)
     
     validated_user_with_Loc = np.array(VAC_Users.validate_user_loc(inputPath))
     np.save(outputPath + 'Users.npy', validated_user_with_Loc)

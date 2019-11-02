@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 from ExtractAndFilter import extractAndFilterBadges as EAC_Badges, extractAndFilterComments as EAC_Comments, \
-    extractAndFilterUsers as EAC_Users
+    extractAndFilterUsers as EAC_Users, extractAndFilterPosts as EAC_Posts
 import os
 import numpy as np
 
@@ -24,6 +24,9 @@ def extractAndFilter(outputPath, inputPath):
     badge_tree = ET.parse(inputPath + 'Badges.xml')
     badge_root = badge_tree.getroot()
 
+    post_tree = ET.parse(inputPath + 'Posts.xml')
+    post_root = post_tree.getroot()
+
     if not os.path.isdir(outputPath):
         os.makedirs(outputPath)
 
@@ -35,3 +38,6 @@ def extractAndFilter(outputPath, inputPath):
 
     cleaned_badges_with_userId = (np.array(EAC_Badges.extract_filter_badges(badge_root)))
     np.save(outputPath + 'Badges.npy', cleaned_badges_with_userId)
+
+    cleaned_posts_with_postId = (np.array(EAC_Posts.extract_filter_posts(post_root)))
+    np.save(outputPath + 'posts.npy', cleaned_posts_with_postId)
